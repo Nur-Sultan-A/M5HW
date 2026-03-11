@@ -27,5 +27,39 @@ class Todo(models.Model):
 
     is_deleted = models.BooleanField(default=False)
 
+
+class Category(models.Model):
+
+    title = models.CharField(
+        max_length=155,
+        verbose_name="Название"
+    )
+
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+
+
+class Type(models.Model):
+
+    title = models.CharField(
+        max_length=155,
+        verbose_name="Название"
+    )
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="types"
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Тип"
+        verbose_name_plural = "Типы"
